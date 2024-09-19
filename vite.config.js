@@ -12,5 +12,15 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+
+  server: {
+      proxy: {
+        '/tools': {
+          target: 'https://galaxy.odahub.fr/api/tools?in_panel=true',
+          changeOrigin: true,
+          secure: false,
+        },
+      },
+    }
 })
