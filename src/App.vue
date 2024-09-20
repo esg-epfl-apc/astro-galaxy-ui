@@ -51,11 +51,13 @@ onMounted(() => {
 
 <MMODAHeader/>
 
-   <div class="content" >
-    <div class="panel panel-default">
 
-      <div class="panel-heading">
-          <div class="pull-right">
+   <div class="content" >
+    <div class="card panel-default">
+
+      <div class="card-header">
+
+          <div class="float-end">
           <div class="main-toolbar btn-group" role="group">
                      <a data-toggle="tooltip" title=""
               data-original-title="Show API token, copy it or request it by email"
@@ -75,8 +77,11 @@ onMounted(() => {
               class="glyphicon glyphicon-info-sign"> </span> </a>
           </div>
         </div>
+        
       </div>
 
+
+      
 
       <div id="formwrapper">
         <div id="common-params" class="common-params">
@@ -124,6 +129,24 @@ onMounted(() => {
 <div class="instruments-panel panel with-nav-tabs panel-primary">
   <div class="panel-heading"></div>
   <div class="panel-body">
+
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" aria-current="page" href="#">Active</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+  </li>
+</ul>
+
+
     <div class="tabs">
       <ul class="nav nav-tabs">
           <li v-for="instr in instr_list" 
