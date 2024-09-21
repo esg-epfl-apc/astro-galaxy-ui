@@ -16,8 +16,8 @@ export default defineConfig({
 
   server: {
       proxy: {
-        '/tools': {
-          target: 'https://galaxy.odahub.fr/api/tools?in_panel=true',
+        '/api/tools': {
+          target: 'https://galaxy.odahub.fr/',
           changeOrigin: true,
           secure: false,
         },
