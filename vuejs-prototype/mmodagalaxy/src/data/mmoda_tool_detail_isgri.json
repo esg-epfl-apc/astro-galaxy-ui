@@ -1,0 +1,343 @@
+[
+  [
+    {
+      "instrumet": "isgri"
+    },
+    {
+      "prod_dict": {
+        "isgri_image": "isgri_image_query",
+        "isgri_lc": "isgri_lc_query",
+        "isgri_spectrum": "isgri_spectrum_query",
+        "spectral_fit": "spectral_fit_query"
+      }
+    },
+    [
+      {
+        "query_name": "src_query"
+      },
+      {
+        "name": "src_name",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "str",
+        "value": "1E 1740.7-2942"
+      },
+      {
+        "name": "RA",
+        "owl_uri": [
+          "http://odahub.io/ontology#Angle"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "deg",
+        "value": 265.97845833
+      },
+      {
+        "name": "DEC",
+        "owl_uri": [
+          "http://odahub.io/ontology#Angle"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "deg",
+        "value": -29.74516667
+      },
+      {
+        "name": "T1",
+        "owl_uri": [
+          "http://odahub.io/ontology#TimeInstant"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "isot",
+        "value": "2017-03-06T13:26:48.000"
+      },
+      {
+        "name": "T_format",
+        "units": "str",
+        "value": "isot"
+      },
+      {
+        "name": "T2",
+        "owl_uri": [
+          "http://odahub.io/ontology#TimeInstant"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "isot",
+        "value": "2017-03-06T15:32:27.000"
+      },
+      {
+        "name": "token",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "is_optional": true
+        },
+        "units": "str",
+        "value": null
+      }
+    ],
+    [
+      {
+        "query_name": "isgri_parameters"
+      },
+      {
+        "name": "user_catalog",
+        "restrictions": {
+          "is_optional": true
+        },
+        "units": null,
+        "value": null
+      },
+      {
+        "name": "scw_list",
+        "owl_uri": [
+          "http://odahub.io/ontology#InputProdList"
+        ],
+        "restrictions": {
+          "is_optional": true
+        },
+        "units": null,
+        "value": []
+      },
+      {
+        "name": "selected_catalog",
+        "restrictions": {
+          "is_optional": true
+        },
+        "units": null,
+        "value": null
+      },
+      {
+        "name": "radius",
+        "owl_uri": [
+          "http://odahub.io/ontology#Angle"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "deg",
+        "value": 15.0
+      },
+      {
+        "name": "max_pointings",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#int",
+          "http://odahub.io/ontology#Integer"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": null,
+        "value": 50
+      },
+      {
+        "name": "osa_version",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "allowed_values": [
+            "OSA11.2-dev210827.0528-37487",
+            "OSA11.2-devt20221103_osa11.2"
+          ],
+          "is_optional": false
+        },
+        "units": "str",
+        "value": "OSA11.2"
+      },
+      {
+        "name": "integral_data_rights",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "allowed_values": [
+            "public",
+            "all-private"
+          ],
+          "is_optional": false
+        },
+        "units": "str",
+        "value": "public"
+      },
+      {
+        "name": "E1_keV",
+        "owl_uri": [
+          "http://odahub.io/ontology#Energy",
+          "http://odahub.io/ontology#Frequency"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "keV",
+        "value": 20.0
+      },
+      {
+        "name": "E2_keV",
+        "owl_uri": [
+          "http://odahub.io/ontology#Energy",
+          "http://odahub.io/ontology#Frequency"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "keV",
+        "value": 40.0
+      }
+    ],
+    [
+      {
+        "query_name": "isgri_image_query"
+      },
+      {
+        "product_name": "isgri_image"
+      },
+      {
+        "name": "detection_threshold",
+        "owl_uri": [
+          "http://odahub.io/ontology#DetectionThreshold"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "sigma",
+        "value": 7.0
+      },
+      {
+        "name": "image_scale_min",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#float",
+          "http://odahub.io/ontology#Float"
+        ],
+        "restrictions": {
+          "is_optional": true
+        },
+        "units": null,
+        "value": null
+      },
+      {
+        "name": "image_scale_max",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#float",
+          "http://odahub.io/ontology#Float"
+        ],
+        "restrictions": {
+          "is_optional": true
+        },
+        "units": null,
+        "value": null
+      }
+    ],
+    [
+      {
+        "query_name": "isgri_spectrum_query"
+      },
+      {
+        "product_name": "isgri_spectrum"
+      }
+    ],
+    [
+      {
+        "query_name": "isgri_lc_query"
+      },
+      {
+        "product_name": "isgri_lc"
+      },
+      {
+        "name": "time_bin",
+        "owl_uri": [
+          "http://odahub.io/ontology#TimeDeltaIsDeprecated"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "sec",
+        "value": 1000.0
+      },
+      {
+        "name": "time_bin_format",
+        "units": "str",
+        "value": "sec"
+      }
+    ],
+    [
+      {
+        "query_name": "spectral_fit_query"
+      },
+      {
+        "product_name": "spectral_fit"
+      },
+      {
+        "name": "xspec_model",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "str",
+        "value": "powerlaw"
+      },
+      {
+        "name": "ph_file_name",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "str",
+        "value": ""
+      },
+      {
+        "name": "arf_file_name",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "str",
+        "value": ""
+      },
+      {
+        "name": "rmf_file_name",
+        "owl_uri": [
+          "http://www.w3.org/2001/XMLSchema#str",
+          "http://odahub.io/ontology#String",
+          "http://odahub.io/ontology#AstrophysicalObject"
+        ],
+        "restrictions": {
+          "is_optional": false
+        },
+        "units": "str",
+        "value": ""
+      }
+    ]
+  ]
+]
