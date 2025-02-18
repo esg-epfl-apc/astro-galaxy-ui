@@ -108,7 +108,7 @@ export default {
       ra.value = object_data.source_ra;
       dec.value = object_data.source_dec;
 
-      store.dispatch("celestial_objects/updateCurrentObject", celestialObject.value);
+      await store.dispatch("celestial_objects/updateCurrentObject", celestialObject.value);
     };
 
     const explore = () => {

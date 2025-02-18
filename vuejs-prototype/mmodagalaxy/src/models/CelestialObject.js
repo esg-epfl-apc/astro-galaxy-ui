@@ -1,4 +1,4 @@
-class CelestialObject {
+export default class CelestialObject {
     constructor(
         title,
         alternativeNamesLongStr = null,

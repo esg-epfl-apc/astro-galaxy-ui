@@ -4,29 +4,29 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
 
-    <Header />
-    <div class="row-switcher">
-      <PlatformSwitcher @update-active="updateActiveComponent" />
-    </div>
-    <div class="row">
-      <component :is="currentComponent" />
-    </div>
-    <div class="row">
-      <ToolList @update-active-tool="updateActiveToolComponent" />
-    </div>
-    <div class="row">
-      <MMODAToolContainer v-if="currentToolComponent === 'MMODAToolContainer'" />
-      <GalaxyToolContainer v-if="currentToolComponent === 'GalaxyToolContainer'" />
-    </div>
-    <Footer />
-    <!--div class="row">
-      <MMODAFileSearch class="mmoda-search" />
-      <MMODASearchHistory class="mmoda-search-history" />
-    </div>
-    <div class="row">
-      <GalaxyFileUpload />
-      <GalaxyHistory />
-    </div-->
+  <Header />
+  <div class="row-switcher">
+    <PlatformSwitcher @update-active="updateActiveComponent" />
+  </div>
+  <div class="row">
+    <component :is="currentComponent" />
+  </div>
+  <div class="row">
+    <ToolList @update-active-tool="updateActiveToolComponent" />
+  </div>
+  <div class="row">
+    <MMODAToolContainer v-if="currentToolComponent === 'MMODAToolContainer'" />
+    <GalaxyToolContainer v-if="currentToolComponent === 'GalaxyToolContainer'" />
+  </div>
+  <Footer />
+  <!--div class="row">
+    <MMODAFileSearch class="mmoda-search" />
+    <MMODASearchHistory class="mmoda-search-history" />
+  </div>
+  <div class="row">
+    <GalaxyFileUpload />
+    <GalaxyHistory />
+  </div-->
 
 </template>
 
@@ -38,9 +38,7 @@ import ToolList from "@/components/ToolList.vue";
 import ToolContent from "@/components/ToolContent.vue";
 import GalaxyHistory from "@/components/GalaxyHistory.vue";
 import MMODAFileContainer from "@/components/MMODAFileContainer.vue";
-import MMODAFileSearch from "@/components/MMODAFileSearch.vue";
 import MMODASearchHistory from "@/components/MMODASearchHistory.vue";
-import MMODAGallery from "@/components/MMODAGallery.vue"
 import MMODAToolHolder from "@/components/MMODAToolHolder.vue";
 import MMODAToolContainer from "@/components/MMODAToolContainer.vue";
 import GalaxyFileContainer from "@/components/GalaxyFileContainer.vue";
@@ -58,9 +56,7 @@ export default {
     ToolContent,
     GalaxyHistory,
     MMODAFileContainer,
-    MMODAFileSearch,
     MMODASearchHistory,
-    MMODAGallery,
     MMODAToolHolder,
     MMODAToolContainer,
     GalaxyFileContainer,

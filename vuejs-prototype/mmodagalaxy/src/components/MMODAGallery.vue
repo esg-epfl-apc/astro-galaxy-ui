@@ -2,14 +2,15 @@
   <section>
     <div class="container">
       <header class="custom-header">
-        <h4 class="header-title">MMODA Gallery - Object: {{ selected_object }}</h4>
+        <h4 class="header-title">MMODA Gallery - Object: {{ selected_object._title || "No object selected" }}</h4>
         <button class="toggle-gallery-button" @click="toggleGallery">
           {{ galleryButtonTitle }}
         </button>
       </header>
 
       <div class="content" :class="contentDisplay">
-        <div class="content gallery-content-display" v-html="raw_gallery_object"></div>
+        <div class="content gallery-content-display" v-html="raw_gallery_object">
+        </div>
       </div>
     </div>
   </section>
@@ -49,33 +50,55 @@ export default {
       this.fetchGalleryData();
     },
 
+    /*
     async fetchGalleryData() {
       const selected_object = this.$store.getters["celestial_objects/currentObject"];
       const form_id = this.$store.getters["celestial_objects/formId"];
 
-      if (selected_object) {
+      if (selected_object.value) {
         try {
           const object_data = await mmodaGalleryService.fetchGallery(selected_object, form_id);
-          this.raw_gallery_object = object_data[1].args.htmlResponse;
+          this.raw_gallery_object_url = object_data[1].args.htmlResponse;
         } catch (error) {
           console.error('Error while fetching gallery:', error);
         }
       }
     },
+    */
   },
 
   setup() {
     const raw_gallery_object = ref(null);
     const store = useStore();
 
-    const selected_object = computed(() => store.getters["celestial_objects/currentObject"]);
-    const form_id = computed(() => store.getters["celestial_objects/formId"]);
+    const selected_object = computed(() => store.getters["celestial_objects/currentObject"] || {});
+    //const form_id = computed(() => store.getters["celestial_objects/formId"]);
+
+    console.log("Selected celestialobject");
+    console.log(selected_object);
+
+    //raw_gallery_object.value = "<p></p>";
 
     const fetchGalleryData = async () => {
-      if (selected_object.value) {
+      if (selected_object.value !== null) {
         try {
-          const object_data = await mmodaGalleryService.fetchGallery(selected_object.value, form_id.value);
-          raw_gallery_object.value = object_data[1].args.htmlResponse;
+          //const object_data = await mmodaGalleryService.fetchGallery(selected_object.value, form_id.value);
+
+          let gallery_url_preview = selected_object.value._urlPreview;
+          let gallery_url = selected_object.value._url;
+          console.log("Gallery URL"+gallery_url_preview);
+
+          //raw_gallery_object.value = object_data[1].args.htmlResponse;
+          //raw_gallery_object.value = object_data[1].args.htmlResponse;
+
+          //raw_gallery_object.value = "<p>aaaaa</p>";
+
+          raw_gallery_object.value = `<iframe src=${gallery_url_preview}></iframe>
+                                      <div id="gallery-link-container">
+                                        <a href=${gallery_url}>Please visit the gallery to see the full list of products for this source >> </a>
+                                      </div>`
+
+          console.log(raw_gallery_object.value);
         } catch (error) {
           console.error('Error while fetching gallery:', error);
         }
@@ -153,13 +176,27 @@ export default {
 .gallery-content-display {
   display: block;
   padding: 20px;
-  height: 800px;
-  overflow: scroll;
+  height: 900px;
+  ##overflow: scroll;
 }
 
 .gallery-content-display :deep(iframe) {
   width: 100%;
   height: 800px;
+  margin-bottom: 20px;
+}
+
+.gallery-content-display :deep(a) {
+  font-weight: bold;
+  font-size: 20px;
+  color: #009778;
+  text-decoration: none;
+  text-align: center;
+}
+
+.gallery-content-display :deep(#gallery-link-container) {
+  width: 34%;
+  margin: 0 auto;
 }
 
 iframe {

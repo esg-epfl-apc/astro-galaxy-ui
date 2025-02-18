@@ -3,8 +3,8 @@
     <header class="custom-header">
       <h2 class="header-title"></h2>
       <div class="button-container">
-        <button class="header-button" @click="onActionClick('Contact')">Contact Us <i class="bi bi-envelope"></i></button>
-        <button class="header-button" @click="onActionClick('')">Help <i class="bi bi-info-circle"></i></button>
+        <button class="header-button" @click="onActionClick('Action 1')">Contact Us <i class="bi bi-envelope"></i></button>
+        <button class="header-button" @click="onActionClick('Action 2')">Help <i class="bi bi-info-circle"></i></button>
       </div>
     </header>
 
