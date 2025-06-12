@@ -9,37 +9,46 @@
       <img src="@/assets/logo-kau.png" class="logo" />
     </div>
     <div class="button-container">
-      <button class="header-button" @click="onButtonClick('Github sign in')">Sign in with Github</button>
-      <button class="header-button" @click="onButtonClick('Sign in')">
-        Sign in <i class="bi bi-box-arrow-in-right"></i>
-      </button>
-      <button class="header-button" @click="onButtonClick('Sign up')">
-        Sign up <i class="bi bi-person"></i>
+      <a class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&state=' + state" target="_blank">Sign in with Github</a>
+      <button class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
+      <button class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i>
       </button>
     </div>
   </header>
 </template>
 
 <script>
+
+import { useRoute } from 'vue-router'
+
 export default {
   name: 'StickyHeader',
   emits: ['show-modal'],
+  mounted() {
+    console.log('Header mounted, checking url parameters');
+    // TODO - Uncomment the following lines if you want to use the route query parameters, but I didn't manage to make it work
+    // probably because of the way the routes are configured in the index.js file
+    // const route = useRoute();
+    // console.log(route.query);
+    const url = new URL(window.location.href);
+    const queryParams = new URLSearchParams(url.search);
+    console.log('Query parameters:', queryParams.toString());
+  },
+  data() {
+    return {
+      state: Math.random().toString(36).slice(2),
+      client_id: 'Iv23lijcxl7RZ7tbBBCy',
+      redirect_uri: 'http://localhost:5173/mmodagalaxy/dist#/',
+      githubLoginRequest: `https://github.com/login/oauth/authorize?`
+    };
+  },
   methods: {
-    onButtonClick(buttonAction) {
-      console.log(`Button clicked: ${buttonAction}`);
+    onButtonClick(buttonActionComponent) {
+      console.log(`Button component clicked: ${buttonActionComponent}`);
 
-      let component = 'SignIn';
-
-      if(buttonAction === 'Github sign in') {
-        component = 'SignInGithub'
-      } else if(buttonAction === 'Sign up') {
-        component = 'SignUp'
+      if(buttonActionComponent === 'SignIn' || buttonActionComponent === 'SignUp') {
+        this.$emit('show-modal', buttonActionComponent);
       }
-
-      this.$emit('show-modal', {
-        component: component,
-        props: {}
-      });
     }
   }
 }
@@ -99,6 +108,11 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
   white-space: nowrap;
+}
+
+a.header-button {
+  text-decoration: none;
+  color: inherit;
 }
 
 .header-button:hover {
