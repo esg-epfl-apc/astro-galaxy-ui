@@ -28,6 +28,33 @@ export default {
       if (returnedState === this.state) {
         console.log('State matches, proceeding with authentication');
         localStorage.removeItem('state');
+        // const body_token_request = new URLSearchParams();
+        // body_token_request.append('client_id', this.client_id);
+        // body_token_request.append('client_secret', '...'); // replace with your client secret
+        // body_token_request.append('code', returnedCode);
+        // body_token_request.append('redirect_uri', this.redirect_uri);
+        // send github post requewst for the token
+        fetch(`${this.githubTokenRequest}client_id=${this.client_id}&client_secret=&code=${returnedCode}&redirect_uri=${this.redirect_uri}`, {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+            },
+            // body: body_token_request
+        })
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error status: ${response.status}`);
+                }
+                let json_response = response.json();
+                return json_response;
+            })
+            .then((data) => {
+                console.log("Response:", data);
+            })
+            .catch((error) => {
+                console.error("Error:", error);
+            });
+
         this.loggedIn = true;
       } else {
         console.error('State does not match, invalide authentication attempt');
@@ -40,7 +67,8 @@ export default {
       loggedIn: false,
       client_id: 'Iv23lijcxl7RZ7tbBBCy',
       redirect_uri: 'http://localhost:5173/mmodagalaxy/dist',
-      githubLoginRequest: `https://github.com/login/oauth/authorize?`
+      githubLoginRequest: `https://github.com/login/oauth/authorize?`,
+      githubTokenRequest: `https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token?`
     };
   },
   methods: { }
