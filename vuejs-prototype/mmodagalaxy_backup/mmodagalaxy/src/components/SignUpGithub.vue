@@ -12,12 +12,14 @@ export default {
     // probably because of the way the routes are configured in the index.js file
     // const route = useRoute();
     // console.log(route.query);
-    if (localStorage.getItem('state'))
-      this.state = localStorage.getItem('state');
-    else {
+    if (localStorage.getItem('state') === null) {
+      console.log(`State value not found in localStorage, generating a new one`);
       this.state = Math.random().toString(36).slice(2);
       localStorage.setItem('state', this.state);
     }
+    else 
+      this.state = localStorage.getItem('state');
+    
     const url = new URL(window.location.href);
     const queryParams = new URLSearchParams(url.search);
     console.log('Query parameters:', queryParams.toString());
@@ -28,18 +30,18 @@ export default {
       if (returnedState === this.state) {
         console.log('State matches, proceeding with authentication');
         localStorage.removeItem('state');
-        // const body_token_request = new URLSearchParams();
-        // body_token_request.append('client_id', this.client_id);
-        // body_token_request.append('client_secret', '...'); // replace with your client secret
-        // body_token_request.append('code', returnedCode);
-        // body_token_request.append('redirect_uri', this.redirect_uri);
+        const body_token_request = new FormData();
+        body_token_request.append('client_id', this.client_id);
+        body_token_request.append('client_secret', import.meta.env.VITE_GITHUB_CLIENT_SECRET);
+        body_token_request.append('code', returnedCode);
+        body_token_request.append('redirect_uri', this.redirect_uri);
         // send github post requewst for the token
-        fetch(`${this.githubTokenRequest}client_id=${this.client_id}&client_secret=&code=${returnedCode}&redirect_uri=${this.redirect_uri}`, {
+        fetch(this.githubTokenRequest, {
             method: "POST",
             headers: {
                 "Accept": "application/json",
             },
-            // body: body_token_request
+            body: body_token_request
         })
             .then((response) => {
                 if (!response.ok) {
@@ -50,14 +52,15 @@ export default {
             })
             .then((data) => {
                 console.log("Response:", data);
+                this.loggedIn = true;
             })
             .catch((error) => {
                 console.error("Error:", error);
+                this.loggedIn = false;
             });
 
-        this.loggedIn = true;
       } else {
-        console.error('State does not match, invalide authentication attempt');
+        console.error(`State does not match (this.state=${this.state}, returnedState=${returnedState}), invalide authentication attempt`);
       }
     }
   },
@@ -65,7 +68,7 @@ export default {
     return {
       state: undefined,
       loggedIn: false,
-      client_id: 'Iv23lijcxl7RZ7tbBBCy',
+      client_id: import.meta.env.VITE_GITHUB_CLIENT_ID,
       redirect_uri: 'http://localhost:5173/mmodagalaxy/dist',
       githubLoginRequest: `https://github.com/login/oauth/authorize?`,
       githubTokenRequest: `https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token?`
