@@ -4,10 +4,19 @@
 
 <script>
 
+import { useStore } from "vuex";
+import { computed } from 'vue'
+
 export default {
   name: "SignUpGithub",
+  setup() {
+    const store = useStore();
+    const userData = computed(() => store.getters['users/getUser']);
+    return {
+      userData
+    }
+  },
   mounted() {
-    console.log('Header mounted, checking url parameters');
     // TODO - Uncomment the following lines if you want to use the route query parameters, but I didn't manage to make it work
     // probably because of the way the routes are configured in the index.js file
     // const route = useRoute();
@@ -67,7 +76,7 @@ export default {
   data() {
     return {
       state: undefined,
-      loggedIn: false,
+      loggedIn: this.userData.token !== null && this.userData.token !== undefined,
       client_id: import.meta.env.VITE_GITHUB_CLIENT_ID,
       client_secret: import.meta.env.VITE_GITHUB_CLIENT_SECRET,
       redirect_uri: import.meta.env.VITE_GITHUB_REDIRECT_URI,
