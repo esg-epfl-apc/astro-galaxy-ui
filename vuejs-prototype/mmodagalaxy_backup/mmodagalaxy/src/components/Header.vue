@@ -10,9 +10,9 @@
     </div>
     <div class="button-container">
       <SignUpGithub />
-      <button class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
-      <button class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i>
-      </button>
+      <button v-if="!loggedIn" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
+      <button v-if="!loggedIn" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i></button>
+      <button v-if="loggedIn" class="header-button"1>My account <i class="bi bi-person-fill"></i></button>
     </div>
   </header>
 </template>
@@ -20,12 +20,26 @@
 <script>
 
 import SignUpGithub from "@/components/SignUpGithub.vue";
+import { useStore } from "vuex";
+import { computed } from 'vue'
 
 export default {
   name: 'StickyHeader',
   emits: ['show-modal'],
   components: {
     SignUpGithub
+  },
+  setup() {
+    const store = useStore();
+    const userData = computed(() => store.getters['users/getUser']);
+    return {
+      userData
+    }
+  },
+  data() {
+    return {
+      loggedIn: this.userData.token !== null && this.userData.token !== undefined,
+    }
   },
   methods: {
     onButtonClick(buttonActionComponent) {
