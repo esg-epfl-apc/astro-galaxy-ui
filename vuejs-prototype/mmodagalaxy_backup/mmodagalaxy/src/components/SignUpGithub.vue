@@ -61,6 +61,8 @@ export default {
             })
             .then((data) => {
                 console.log("Response:", data);
+                // store the token in the userData store
+                this.userData.token = data.access_token;
                 this.loggedIn = true;
             })
             .catch((error) => {
