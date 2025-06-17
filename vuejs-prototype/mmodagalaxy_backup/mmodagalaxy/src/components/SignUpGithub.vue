@@ -32,7 +32,7 @@ export default {
         localStorage.removeItem('state');
         const body_token_request = new FormData();
         body_token_request.append('client_id', this.client_id);
-        body_token_request.append('client_secret', import.meta.env.VITE_GITHUB_CLIENT_SECRET);
+        body_token_request.append('client_secret', this.client_secret);
         body_token_request.append('code', returnedCode);
         body_token_request.append('redirect_uri', this.redirect_uri);
         // send github post requewst for the token
@@ -69,9 +69,10 @@ export default {
       state: undefined,
       loggedIn: false,
       client_id: import.meta.env.VITE_GITHUB_CLIENT_ID,
-      redirect_uri: 'http://localhost:5173/mmodagalaxy/dist',
-      githubLoginRequest: `https://github.com/login/oauth/authorize?`,
-      githubTokenRequest: `https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token?`
+      client_secret: import.meta.env.VITE_GITHUB_CLIENT_SECRET,
+      redirect_uri: import.meta.env.VITE_GITHUB_REDIRECT_URI,
+      githubLoginRequest: import.meta.env.VITE_GITHUB_LOGIN_REQUEST_URI,
+      githubTokenRequest: import.meta.env.VITE_GITHUB_ACCESS_TOKEN_URI
     };
   },
   methods: { }
