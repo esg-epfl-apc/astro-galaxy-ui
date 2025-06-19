@@ -10,9 +10,9 @@
     </div>
     <div class="button-container">
       <SignUpGithub />
-      <button v-if="!loggedIn" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
-      <button v-if="!loggedIn" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i></button>
-      <button v-if="loggedIn" class="header-button"1>My account <i class="bi bi-person-fill"></i></button>
+      <button v-if="userData.token == null" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
+      <button v-if="userData.token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i></button>
+      <button v-if="userData.token != null" class="header-button">My account <i class="bi bi-person-fill"></i></button>
     </div>
   </header>
 </template>
@@ -20,8 +20,8 @@
 <script>
 
 import SignUpGithub from "@/components/SignUpGithub.vue";
-import { useStore } from "vuex";
-import { computed } from 'vue'
+import { useStore, mapGetters } from "vuex";
+import { computed, ref, watch } from 'vue'
 
 export default {
   name: 'StickyHeader',
@@ -32,15 +32,17 @@ export default {
   setup() {
     const store = useStore();
     const userData = computed(() => store.getters['users/getUser']);
+    watch(userData, () => {
+      console.log("userData changed:", userData.value);
+      },
+      { deep: true }
+    );
+
     return {
       userData
     }
   },
-  data() {
-    return {
-      loggedIn: this.userData.token !== null && this.userData.token !== undefined,
-    }
-  },
+  data() { },
   methods: {
     onButtonClick(buttonActionComponent) {
       console.log(`Button component clicked: ${buttonActionComponent}`);

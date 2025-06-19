@@ -1,5 +1,5 @@
 <template>
-  <a v-if="!loggedIn" class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&state=' + state" target="_blank">Sign in with Github</a>
+  <a v-if="userData.token == null" class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&state=' + state" target="_blank">Sign in with Github</a>
 </template>
 
 <script>
@@ -63,11 +63,9 @@ export default {
                 console.log("Response:", data);
                 // store the token in the userData store
                 this.userData.token = data.access_token;
-                this.loggedIn = true;
             })
             .catch((error) => {
                 console.error("Error:", error);
-                this.loggedIn = false;
             });
 
       } else {
@@ -78,7 +76,6 @@ export default {
   data() {
     return {
       state: undefined,
-      loggedIn: this.userData.token !== null && this.userData.token !== undefined,
       client_id: import.meta.env.VITE_GITHUB_CLIENT_ID,
       client_secret: import.meta.env.VITE_GITHUB_CLIENT_SECRET,
       redirect_uri: import.meta.env.VITE_GITHUB_REDIRECT_URI,
