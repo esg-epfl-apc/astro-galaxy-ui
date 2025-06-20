@@ -22,7 +22,6 @@
 import SignUpGithub from "@/components/SignUpGithub.vue";
 import { useStore, mapGetters } from "vuex";
 import { computed, ref, watch } from 'vue'
-import User from "@/models/User";
 
 export default {
   name: 'StickyHeader',
