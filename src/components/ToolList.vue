@@ -51,51 +51,51 @@ export default {
       panel_section_id: "MMODA Tools"
     }
 
-    // const { fetchTools } = store.dispatch("tools/fetchTools");
+    const { fetchTools } = store.dispatch("tools/fetchTools");
 
-    // onMounted(async() => {
+    onMounted(async() => {
 
-    //   /*
-    //   panelSections.value = data.map((section) => ({
-    //     panel_section_name: section.name,
-    //     panel_section_id: section.id,
-    //   }));
-    //   */
+      /*
+      panelSections.value = data.map((section) => ({
+        panel_section_name: section.name,
+        panel_section_id: section.id,
+      }));
+      */
 
-    //   try {
-    //     await store.dispatch("tools/fetchTools");
-    //     console.log("Fetched tools:");
-    //     console.log(store.state.tools.tools);
-    //     tools.value = store.state.tools.tools;
+      try {
+        await store.dispatch("tools/fetchTools");
+        console.log("Fetched tools:");
+        console.log(store.state.tools.tools);
+        tools.value = store.state.tools.tools;
 
-    //     const uniquePanelSections = new Set();
+        const uniquePanelSections = new Set();
 
-    //     tools.value.forEach((tool) => {
-    //       const raw_tool = toRaw(tool);
-    //       console.log(raw_tool.panel_section_name);
-    //       if (raw_tool.panel_section_name) {
-    //         uniquePanelSections.add(raw_tool.panel_section_name);
-    //       }
-    //     });
+        tools.value.forEach((tool) => {
+          const raw_tool = toRaw(tool);
+          console.log(raw_tool.panel_section_name);
+          if (raw_tool.panel_section_name) {
+            uniquePanelSections.add(raw_tool.panel_section_name);
+          }
+        });
 
-    //     panelSections.value = [...uniquePanelSections].map((sectionName, index) => ({
-    //       panel_section_id: `section_${index}`,
-    //       panel_section_name: sectionName,
-    //     }));
-    //     console.log("Panel sections:");
-    //     console.log(uniquePanelSections);
-    //     console.log(panelSections);
+        panelSections.value = [...uniquePanelSections].map((sectionName, index) => ({
+          panel_section_id: `section_${index}`,
+          panel_section_name: sectionName,
+        }));
+        console.log("Panel sections:");
+        console.log(uniquePanelSections);
+        console.log(panelSections);
 
-    //   } catch (error) {
-    //     console.error("Error fetching tools:", error);
-    //   }
+      } catch (error) {
+        console.error("Error fetching tools:", error);
+      }
 
-    //   //panelSections.value.unshift(mmoda_panel);
+      //panelSections.value.unshift(mmoda_panel);
 
-    //   selectedSection.value = panelSections.value[0]?.panel_section_name || "";
+      selectedSection.value = panelSections.value[0]?.panel_section_name || "";
 
-    //   loadTools();
-    // });
+      loadTools();
+    });
 
 
     const loadTools = () => {
