@@ -63,6 +63,7 @@ export default {
                 console.log("Response:", data);
                 // store the token in the userData store
                 this.userData.token = data.access_token;
+                localStorage.setItem('userToken', this.userData.token);
             })
             .catch((error) => {
                 console.error("Error:", error);

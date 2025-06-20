@@ -22,6 +22,7 @@
 import SignUpGithub from "@/components/SignUpGithub.vue";
 import { useStore, mapGetters } from "vuex";
 import { computed, ref, watch } from 'vue'
+import User from "@/models/User";
 
 export default {
   name: 'StickyHeader',
@@ -32,6 +33,11 @@ export default {
   setup() {
     const store = useStore();
     const userData = computed(() => store.getters['users/getUser']);
+    if (localStorage.getItem('userToken') !== null) {
+      const userTokenLocalStorage = localStorage.getItem('userToken');
+      userData.value.token = userTokenLocalStorage;
+    }
+
     watch(userData, () => {
       console.log("userData changed:", userData.value);
       },
