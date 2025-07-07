@@ -1,5 +1,5 @@
 <template>
-  <a v-if="userData.token == null" class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&redirect_uri=' + redirect_uri + '&state=' + state" target="_blank">Sign in with Github</a>
+  <a v-if="userData.token == null" class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state" target="_blank">Sign in with Github</a>
 </template>
 
 <script>
