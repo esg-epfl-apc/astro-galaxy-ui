@@ -1,21 +1,13 @@
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap"
+import './assets/main.css'
 
-
-import {createApp} from 'vue'
-// // import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-// // import {Tabs, Tab} from 'vue3-tabs-component';
+import { createApp } from 'vue'
 import App from './App.vue'
+import store from './stores'
+import router from './router'
 
-// import { createVbPlugin } from 'vue3-plugin-bootstrap5'
-// import { Alert, Button, Carousel, Collapse, Dropdown, Modal,
-//   Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip } from 'bootstrap'
+const app = createApp(App)
 
-// let vbPlugin = createVbPlugin({ Alert, Button, Carousel, Collapse, Dropdown, Modal,
-//   Offcanvas, Popover, ScrollSpy, Tab, Toast, Tooltip })
+app.use(store)
+app.use(router)
 
-
-
-createApp(App)
-    .mount('#app')
-
+app.mount('#app')
