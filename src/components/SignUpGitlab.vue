@@ -46,24 +46,24 @@ export default {
           fetch(access_token_mmoda_request, {
               method: "GET",
           })
-              .then((response) => {
-                  if (!response.ok) {
-                      throw new Error(`HTTP error status: ${response.status}`);
-                  }
-                  let json_response = response.json();
-                  return json_response;
-              })
-              .then((data) => {
-                  console.log("Response:", data);
-                  // store the token in the userData store
-                  this.userData.access_token = data.access_token;
-                  this.userData.exp_time = data.created_at + data.expires_in;
-                  this.userData.id_token = data.id_token;
-                  localStorage.setItem('user_data', JSON.stringify(this.userData));
-              })
-              .catch((error) => {
-                  console.error("Error:", error);
-              });
+          .then((response) => {
+              if (!response.ok) {
+                  throw new Error(`HTTP error status: ${response.status}`);
+              }
+              let json_response = response.json();
+              return json_response;
+          })
+          .then((data) => {
+              console.log("Response:", data);
+              // store the token in the userData store
+              this.userData.access_token = data.access_token;
+              this.userData.exp_time = data.created_at + data.expires_in;
+              this.userData.id_token = data.id_token;
+              localStorage.setItem('user_data', JSON.stringify(this.userData));
+          })
+          .catch((error) => {
+              console.error("Error:", error);
+          });
 
         } else {
           console.error(`State does not match (this.state=${this.state}, returnedState=${returnedState}), invalide authentication attempt`);
