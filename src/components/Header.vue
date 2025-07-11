@@ -10,9 +10,9 @@
     </div>
     <div class="button-container">
       <SignUpGitlab />
-      <button v-if="userData.token == null" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
-      <button v-if="userData.token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i></button>
-      <button v-if="userData.token != null" class="header-button">My account <i class="bi bi-person-fill"></i></button>
+      <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
+      <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i></button>
+      <button v-if="userData.access_token != null" class="header-button">My account <i class="bi bi-person-fill"></i></button>
     </div>
   </header>
 </template>
@@ -32,9 +32,13 @@ export default {
   setup() {
     const store = useStore();
     const userData = computed(() => store.getters['users/getUser']);
-    if (localStorage.getItem('userToken') !== null) {
-      const userTokenLocalStorage = localStorage.getItem('userToken');
-      userData.value.token = userTokenLocalStorage;
+    if (localStorage.getItem('user_data') !== null) {
+      const local_user_data = JSON.parse(localStorage.getItem('user_data'));
+      userData.value.access_token = local_user_data.access_token;
+      userData.value.exp_time = local_user_data.exp_time;
+      userData.value.id_token = local_user_data.id_token;
+      userData.value.session_id = local_user_data.session_id;
+      console.log("User data loaded from localStorage:", userData.value);
     }
 
     watch(userData, () => {

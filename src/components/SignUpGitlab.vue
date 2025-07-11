@@ -1,5 +1,5 @@
 <template>
-  <a v-if="userData.token == null" class="header-button" :href="loginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+api+email'">Sign in with Gitlab</a>
+  <a v-if="userData.access_token == null" class="header-button" :href="loginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+api+email'">Sign in with Gitlab</a>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
     }
   },
   mounted() {
-    if (this.userData.token != null) {
+    if (this.userData.access_token != null) {
       console.log("User is already authenticated, token found in userData store");
       return;
     } else {
@@ -56,8 +56,10 @@ export default {
               .then((data) => {
                   console.log("Response:", data);
                   // store the token in the userData store
-                  this.userData.token = data.access_token;
-                  localStorage.setItem('userToken', this.userData.token);
+                  this.userData.access_token = data.access_token;
+                  this.userData.exp_time = data.created_at + data.expires_in;
+                  this.userData.id_token = data.id_token;
+                  localStorage.setItem('user_data', JSON.stringify(this.userData));
               })
               .catch((error) => {
                   console.error("Error:", error);
