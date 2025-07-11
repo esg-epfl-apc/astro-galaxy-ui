@@ -84,5 +84,8 @@ export default {
 </script>
 
 <style scoped>
-
+a.header-button {
+  font-family: 'ubuntu';
+  color: #333333 !important;
+}
 </style>
