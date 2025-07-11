@@ -1,5 +1,5 @@
 <template>
-  <a v-if="userData.token == null" class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+api+email'">Sign in with Github</a>
+  <a v-if="userData.token == null" class="header-button" :href="loginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+api+email'">Sign in with Gitlab</a>
 </template>
 
 <script>
@@ -72,11 +72,9 @@ export default {
   data() {
     return {
       state: undefined,
-      client_id: import.meta.env.VITE_GITHUB_CLIENT_ID,
-      // client_secret: import.meta.env.VITE_GITHUB_CLIENT_SECRET,
-      redirect_uri: import.meta.env.VITE_GITHUB_REDIRECT_URI,
-      githubLoginRequest: import.meta.env.VITE_GITHUB_LOGIN_REQUEST_URI,
-      // githubTokenRequest: import.meta.env.VITE_GITHUB_ACCESS_TOKEN_URI,
+      client_id: import.meta.env.VITE_OAUTH_CLIENT_ID,
+      redirect_uri: import.meta.env.VITE_REDIRECT_URI,
+      loginRequest: import.meta.env.VITE_LOGIN_REQUEST_URI,
       localAccessTokenRequest: import.meta.env.VITE_LOCAL_ACCESS_TOKEN_REQUEST_URI,
     };
   },
