@@ -1,5 +1,5 @@
 <template>
-  <a v-if="userData.token == null" class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+api'"  target="_blank">Sign in with Github</a>
+  <a v-if="userData.token == null" class="header-button" :href="githubLoginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+api+email'">Sign in with Github</a>
 </template>
 
 <script>
@@ -34,7 +34,8 @@ export default {
       console.log('Query parameters:', queryParams.toString());
       let returnedState = queryParams.get('state');
       let returnedCode = queryParams.get('code');
-      if (returnedState != null && typeof returnedCode != null) {
+      if (returnedState != null && returnedCode != null) {
+        this.$router.push({ name: 'home', 'query': null, replace: true});
         console.log(`State: ${returnedState}, Code: ${returnedCode}`);
         if (returnedState === this.state) {
           console.log('State matches, proceeding with authentication');
