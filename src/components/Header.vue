@@ -9,7 +9,7 @@
       <img src="@/assets/logo-kau.png" class="logo" />
     </div>
     <div class="button-container">
-      <SignUpGithub />
+      <SignUpGitlab />
       <button v-if="userData.token == null" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
       <button v-if="userData.token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i></button>
       <button v-if="userData.token != null" class="header-button">My account <i class="bi bi-person-fill"></i></button>
@@ -19,15 +19,15 @@
 
 <script>
 
-import SignUpGithub from "@/components/SignUpGithub.vue";
-import { useStore, mapGetters } from "vuex";
-import { computed, ref, watch } from 'vue'
+import SignUpGitlab from "@/components/SignUpGitlab.vue";
+import { useStore } from "vuex";
+import { computed, watch } from 'vue'
 
 export default {
   name: 'StickyHeader',
   emits: ['show-modal'],
   components: {
-    SignUpGithub
+    SignUpGitlab
   },
   setup() {
     const store = useStore();
