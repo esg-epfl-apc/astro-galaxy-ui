@@ -69,10 +69,6 @@ export default {
           localStorage.removeItem('user_data');
           break;
       }
-
-      // if(buttonActionComponent === 'SignIn' || buttonActionComponent === 'SignUp') {
-      //   this.$emit('show-modal', buttonActionComponent);
-      // }
     }
   }
 }
