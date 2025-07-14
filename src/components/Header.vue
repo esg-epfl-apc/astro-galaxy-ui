@@ -10,9 +10,10 @@
     </div>
     <div class="button-container">
       <SignUpGitlab />
-      <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right"></i></button>
-      <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person"></i></button>
-      <button v-if="userData.access_token != null" class="header-button">My account <i class="bi bi-person-fill"></i></button>
+      <!-- <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right header-icon"></i></button> -->
+      <!-- <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person header-icon"></i></button> -->
+      <button v-if="userData.access_token != null" class="header-button">My account <i class="bi bi-person-fill header-icon"></i></button>
+      <button v-if="userData.access_token != null" class="header-button" @click="onButtonClick('LogOut')">Log out <i class="bi bi-box-arrow-right header-icon"></i></button>
     </div>
   </header>
 </template>
@@ -56,15 +57,33 @@ export default {
     onButtonClick(buttonActionComponent) {
       console.log(`Button component clicked: ${buttonActionComponent}`);
 
-      if(buttonActionComponent === 'SignIn' || buttonActionComponent === 'SignUp') {
-        this.$emit('show-modal', buttonActionComponent);
+      switch ( buttonActionComponent ) {
+        case 'SignIn':
+        case 'SignUp':
+          this.$emit('show-modal', buttonActionComponent);
+        case 'LogOut':
+          this.userData.access_token = null;
+          this.userData.exp_time = null;
+          this.userData.id_token = null;
+          this.userData.session_id = null;
+          localStorage.removeItem('user_data');
+          break;
       }
+
+      // if(buttonActionComponent === 'SignIn' || buttonActionComponent === 'SignUp') {
+      //   this.$emit('show-modal', buttonActionComponent);
+      // }
     }
   }
 }
 </script>
 
 <style scoped>
+.header-icon {
+  margin-left: 5px;
+  font-size: 1.2em;
+}
+
 .sticky-header {
   position: fixed;
   top: 0;
