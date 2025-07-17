@@ -38,7 +38,8 @@
 
 <script>
 import { useStore } from "vuex";
-import { computed, watch } from 'vue'
+import { computed, watch } from 'vue';
+import { jwtDecode } from "jwt-decode";
 import Header from "@/components/Header.vue";
 import Footer from "@/components/Footer.vue";
 import PlatformSwitcher from "@/components/PlatformSwitcher.vue";
@@ -97,11 +98,21 @@ export default {
         userData.value.exp_time = null;
         userData.value.id_token = null;
         userData.value.session_id = null;
+        userData.value.user_nickname = null;
+        userData.value.user_email = null;
+        userData.value.user_name = null;
+        console.log("User data cleared");
       } else {
         userData.value.access_token = local_user_data.access_token;
         userData.value.exp_time = local_user_data.exp_time;
         userData.value.id_token = local_user_data.id_token;
         userData.value.session_id = local_user_data.session_id;
+
+        const decoded_id_token = jwtDecode(userData.value.id_token);
+        userData.value.user_nickname = decoded_id_token.nickname;
+        userData.value.user_email = decoded_id_token.email;
+        userData.value.user_name = decoded_id_token.name;
+
         console.log("User data loaded from localStorage:", userData.value);
       }
     }

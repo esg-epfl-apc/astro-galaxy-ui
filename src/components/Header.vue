@@ -58,6 +58,9 @@ export default {
           this.userData.exp_time = null;
           this.userData.id_token = null;
           this.userData.session_id = null;
+          this.userData.user_nickname = null;
+          this.userData.user_email = null;
+          this.userData.user_name = null;
           localStorage.removeItem('user_data');
           break;
       }

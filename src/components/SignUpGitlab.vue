@@ -6,6 +6,7 @@
 
 import { useStore } from "vuex";
 import { computed } from 'vue'
+import { jwtDecode } from "jwt-decode";
 
 export default {
   name: "SignUpGithub",
@@ -59,7 +60,16 @@ export default {
               this.userData.access_token = data.access_token;
               this.userData.exp_time = data.created_at + data.expires_in;
               this.userData.id_token = data.id_token;
+              this.userData.session_id = data.session_id;
+
+              const decoded_id_token = jwtDecode(this.userData.id_token);
+              this.userData.user_nickname = decoded_id_token.nickname;
+              this.userData.user_email = decoded_id_token.email;
+              this.userData.user_name = decoded_id_token.name;
+              
+              // store the user data in localStorage
               localStorage.setItem('user_data', JSON.stringify(this.userData));
+              console.log("User data stored in localStorage:", this.userData);
           })
           .catch((error) => {
               console.error("Error:", error);
