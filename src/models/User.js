@@ -4,6 +4,9 @@ export default class User {
     access_token = null;
     exp_time = null;
     id_token = null;
+    user_nickname = null;
+    user_email = null;
+    user_name = null;
 
 
     constructor() { }
@@ -41,5 +44,26 @@ export default class User {
     }
     set access_token(value) {
         this.access_token = value;
+    }
+
+    get user_nickname() {
+        return this.user_nickname;
+    }
+    set user_nickname(value) {
+        this.user_nickname = value;
+    }
+
+    get user_email() {
+        return this.user_email;
+    }
+    set user_email(value) {
+        this.user_email = value;
+    }
+
+    get user_name() {
+        return this.user_name;
+    }
+    set user_name(value) {
+        this.user_name = value;
     }
 }
