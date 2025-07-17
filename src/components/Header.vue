@@ -10,9 +10,9 @@
     </div>
     <div class="button-container">
       <SignUpGitlab />
-      <!-- <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right header-icon"></i></button> -->
+      <!-- <button class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right header-icon"></i></button> -->
       <!-- <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person header-icon"></i></button> -->
-      <button v-if="userData.access_token != null" class="header-button">My account <i class="bi bi-person-fill header-icon"></i></button>
+      <button v-if="userData.access_token != null" class="header-button" @click="onButtonClick('MyAccount')">My account <i class="bi bi-person-fill header-icon"></i></button>
       <button v-if="userData.access_token != null" class="header-button" @click="onButtonClick('LogOut')">Log out <i class="bi bi-box-arrow-right header-icon"></i></button>
     </div>
   </header>
@@ -52,7 +52,12 @@ export default {
       switch ( buttonActionComponent ) {
         case 'SignIn':
         case 'SignUp':
-          this.$emit('show-modal', buttonActionComponent);
+        case 'MyAccount':
+          this.$emit('show-modal', {
+            component: buttonActionComponent,
+            props: { user_data: this.userData }
+          });
+          break;
         case 'LogOut':
           this.userData.access_token = null;
           this.userData.exp_time = null;
