@@ -57,6 +57,7 @@ import Modal from "@/components/Modal.vue";
 import SignIn from "@/components/SignIn.vue";
 import SignUp from "@/components/SignUp.vue";
 import Contact from "@/components/Contact.vue";
+import MyAccount from "@/components/MyAccount.vue";
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import MMODAResultLoader from "@/components/MMODAResultLoader.vue";
 
@@ -64,6 +65,7 @@ const modalComponentMap = {
   SignIn,
   SignUp,
   Contact,
+  MyAccount,
   MMODAResultLoader,
 };
 
