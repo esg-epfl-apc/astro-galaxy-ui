@@ -33,24 +33,6 @@ export default {
   setup() {
     const store = useStore();
     const userData = computed(() => store.getters['users/getUser']);
-    if (localStorage.getItem('user_data') !== null) {
-      const local_user_data = JSON.parse(localStorage.getItem('user_data'));
-      // check if the token is still valid
-      if (local_user_data.exp_time != null && new Date(local_user_data.exp_time * 1000) < new Date()) {
-        console.log("Token expired, clearing user data");
-        localStorage.removeItem('user_data');
-        userData.value.access_token = null;
-        userData.value.exp_time = null;
-        userData.value.id_token = null;
-        userData.value.session_id = null;
-      } else {
-        userData.value.access_token = local_user_data.access_token;
-        userData.value.exp_time = local_user_data.exp_time;
-        userData.value.id_token = local_user_data.id_token;
-        userData.value.session_id = local_user_data.session_id;
-        console.log("User data loaded from localStorage:", userData.value);
-      }
-    }
 
     watch(userData, () => {
       console.log("userData changed:", userData.value);
