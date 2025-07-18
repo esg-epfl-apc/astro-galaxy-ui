@@ -54,8 +54,7 @@ export default {
         case 'SignUp':
         case 'MyAccount':
           this.$emit('show-modal', {
-            component: buttonActionComponent,
-            props: { user_data: this.userData }
+            component: buttonActionComponent
           });
           break;
         case 'LogOut':
