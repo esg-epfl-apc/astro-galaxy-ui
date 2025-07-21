@@ -44,7 +44,6 @@ export default {
       userData
     }
   },
-  data() { },
   methods: {
     onButtonClick(buttonActionComponent) {
       console.log(`Button component clicked: ${buttonActionComponent}`);
