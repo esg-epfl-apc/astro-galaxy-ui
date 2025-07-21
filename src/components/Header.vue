@@ -9,7 +9,7 @@
       <img src="@/assets/logo-kau.png" class="logo" />
     </div>
     <div class="button-container">
-      <SignUpGitlab />
+      <SignUpGitlab @show-modal="({ component, props }) => openModal(component, props)" />
       <!-- <button class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right header-icon"></i></button> -->
       <!-- <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person header-icon"></i></button> -->
       <button v-if="userData.access_token != null" class="header-button" @click="onButtonClick('MyAccount')">My account <i class="bi bi-person-fill header-icon"></i></button>
@@ -20,6 +20,9 @@
 
 <script>
 
+import Modal from "@/components/Modal.vue";
+// import { inject } from 'vue'
+
 import SignUpGitlab from "@/components/SignUpGitlab.vue";
 import { useStore } from "vuex";
 import { computed, watch } from 'vue'
@@ -28,11 +31,13 @@ export default {
   name: 'StickyHeader',
   emits: ['show-modal'],
   components: {
+    Modal,
     SignUpGitlab
   },
   setup() {
     const store = useStore();
     const userData = computed(() => store.getters['users/getUser']);
+    // const openModal = inject('openModal');
 
     watch(userData, () => {
       console.log("userData changed:", userData.value);
@@ -41,10 +46,18 @@ export default {
     );
 
     return {
-      userData
+      userData,
+      // openModal
     }
   },
   methods: {
+    openModal(component, props = {}) {
+      console.log(`Opening modal with component: ${component}`);
+      this.$emit('show-modal', {
+        component,
+        props
+      });
+    },
     onButtonClick(buttonActionComponent) {
       console.log(`Button component clicked: ${buttonActionComponent}`);
 

@@ -17,7 +17,7 @@
     />
     <GalaxyToolContainer v-if="currentToolComponent === 'GalaxyToolContainer'" />
   </div>
-  <Footer />
+  <Footer /> 
   <Modal
       v-if="showModal"
       :component-name="modalComponent"
@@ -60,6 +60,7 @@ import Contact from "@/components/Contact.vue";
 import MyAccount from "@/components/MyAccount.vue";
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import MMODAResultLoader from "@/components/MMODAResultLoader.vue";
+import ErrorModal from "@/components/ErrorModal.vue";
 
 const modalComponentMap = {
   SignIn,
@@ -67,6 +68,7 @@ const modalComponentMap = {
   Contact,
   MyAccount,
   MMODAResultLoader,
+  ErrorModal
 };
 
 export default {

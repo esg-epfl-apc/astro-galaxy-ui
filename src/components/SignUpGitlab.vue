@@ -73,6 +73,9 @@ export default {
           })
           .catch((error) => {
               console.error("Error:", error);
+              this.$emit('show-modal', {
+                component: 'ErrorModal'
+              });
           });
 
         } else {
