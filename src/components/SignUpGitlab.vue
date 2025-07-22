@@ -74,7 +74,11 @@ export default {
           .catch((error) => {
               console.error("Error:", error);
               this.$emit('show-modal', {
-                component: 'ErrorModal'
+                component: 'ErrorModal',
+                props: {
+                  title: 'Authentication Error',
+                  message: 'An error occurred while trying to authenticate with Gitlab. Please try again later.'
+                }
               });
           });
 
