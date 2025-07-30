@@ -1,5 +1,5 @@
 <template>
-  <a v-if="userData.access_token == null" class="header-button" :href="loginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+api+email'">Sign in with Gitlab</a>
+  <a v-if="userData.access_token == null" class="header-button" :href="loginRequest + 'client_id=' + client_id + '&response_type=code&redirect_uri=' + redirect_uri + '&state=' + state + '&scope=openid+email'">Sign in with Gitlab</a>
 </template>
 
 <script>
