@@ -9,43 +9,88 @@
       <img src="@/assets/logo-kau.png" class="logo" />
     </div>
     <div class="button-container">
-      <button class="header-button" @click="onButtonClick('Github sign in')">Sign in with Github</button>
-      <button class="header-button" @click="onButtonClick('Sign in')">
-        Sign in <i class="bi bi-box-arrow-in-right"></i>
-      </button>
-      <button class="header-button" @click="onButtonClick('Sign up')">
-        Sign up <i class="bi bi-person"></i>
-      </button>
+      <SignUpGitlab @show-modal="({ component, props }) => openModal(component, props)" />
+      <!-- <button class="header-button" @click="onButtonClick('SignIn')">Sign in <i class="bi bi-box-arrow-in-right header-icon"></i></button> -->
+      <!-- <button v-if="userData.access_token == null" class="header-button" @click="onButtonClick('SignUp')">Sign up <i class="bi bi-person header-icon"></i></button> -->
+      <button v-if="userData.access_token != null" class="header-button" @click="onButtonClick('MyAccount')">My account <i class="bi bi-person-fill header-icon"></i></button>
+      <button v-if="userData.access_token != null" class="header-button" @click="onButtonClick('LogOut')">Log out <i class="bi bi-box-arrow-right header-icon"></i></button>
     </div>
   </header>
 </template>
 
 <script>
+
+import Modal from "@/components/Modal.vue";
+// import { inject } from 'vue'
+
+import SignUpGitlab from "@/components/SignUpGitlab.vue";
+import { useStore } from "vuex";
+import { computed, watch } from 'vue'
+
 export default {
   name: 'StickyHeader',
   emits: ['show-modal'],
+  components: {
+    Modal,
+    SignUpGitlab
+  },
+  setup() {
+    const store = useStore();
+    const userData = computed(() => store.getters['users/getUser']);
+    // const openModal = inject('openModal');
+
+    watch(userData, () => {
+      console.log("userData changed:", userData.value);
+      },
+      { deep: true }
+    );
+
+    return {
+      userData,
+      // openModal
+    }
+  },
   methods: {
-    onButtonClick(buttonAction) {
-      console.log(`Button clicked: ${buttonAction}`);
-
-      let component = 'SignIn';
-
-      if(buttonAction === 'Github sign in') {
-        component = 'SignInGithub'
-      } else if(buttonAction === 'Sign up') {
-        component = 'SignUp'
-      }
-
+    openModal(component, props = {}) {
+      console.log(`Opening modal with component: ${component}`);
       this.$emit('show-modal', {
-        component: component,
-        props: {}
+        component,
+        props
       });
+    },
+    onButtonClick(buttonActionComponent) {
+      console.log(`Button component clicked: ${buttonActionComponent}`);
+
+      switch ( buttonActionComponent ) {
+        case 'SignIn':
+        case 'SignUp':
+        case 'MyAccount':
+          this.$emit('show-modal', {
+            component: buttonActionComponent
+          });
+          break;
+        case 'LogOut':
+          this.userData.access_token = null;
+          this.userData.exp_time = null;
+          this.userData.id_token = null;
+          this.userData.session_id = null;
+          this.userData.user_nickname = null;
+          this.userData.user_email = null;
+          this.userData.user_name = null;
+          localStorage.removeItem('user_data');
+          break;
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.header-icon {
+  margin-left: 5px;
+  font-size: 1.2em;
+}
+
 .sticky-header {
   position: fixed;
   top: 0;
@@ -99,6 +144,11 @@ export default {
   cursor: pointer;
   transition: background-color 0.3s;
   white-space: nowrap;
+}
+
+a.header-button {
+  text-decoration: none;
+  color: inherit;
 }
 
 .header-button:hover {

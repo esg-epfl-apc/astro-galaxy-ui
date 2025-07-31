@@ -102,15 +102,17 @@ export default {
         } catch (error) {
           console.error('Error while fetching gallery:', error);
         }
-      }
+       }
     };
 
     onMounted(() => {
+      console.log("Mounted MMODAGallery");
       window.addEventListener("reload-gallery", fetchGalleryData);
-      fetchGalleryData();
+      // fetchGalleryData();
     });
 
     watch(selected_object, () => {
+      console.log("selected_object changed");
       fetchGalleryData();
     });
 
